@@ -1,0 +1,95 @@
+<div *ngIf="orderSearch">
+    <form [formGroup]="orderSearchForm" (ngSubmit)="searchOrder(true)">
+      <div style="height: 15px;"> </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"><strong>Order Id</strong></label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" formControlName="orderId">
+        </div>
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div style="height: 5px;" >
+  </div>
+  
+  <div *ngIf="orderDetails">
+    <div class="form-group row">
+    <div class="col-sm-12 col-form-label bg-info text-white sideHeading alignCenter">
+      Order Details
+    </div>
+  </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Order Id</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.orderId}}</label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Order Status</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.orderStatus}}</label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Order Creation Date</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.orderCreationUtcTs}}</label>
+    </div>
+    <div *ngIf="order.orderDeletedUtcTs" class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Order Deleted Date</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.orderDeletedUtcTs}}</label>
+    </div>
+    <P class="col-sm-2 col-form-label bg-info text-white adjustPadding">
+      Customer Details
+    </P>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Name</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.customer.firstName}}&nbsp;{{order.customer.lastName}}</label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Email</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.customer.emailAddress}}</label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Phone</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.customer.phone}}</label>
+    </div>
+    <P class="col-sm-2 col-form-label bg-info text-white adjustPadding">
+      Paymnet Details
+    </P>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Payment reference id</strong></label>
+      <label class="col-sm-5 col-form-label">{{order.formOfPayment.paymentReferenceId}}</label>
+    </div>
+    <div *ngIf="order.formOfPayment.paymentMethod.paymentMethodType === 'Credit card' || order.formOfPayment.paymentMethod.paymentMethodType === 'Debit card'">
+      <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>{{order.formOfPayment.paymentMethod.paymentMethodType}} details</strong></label>
+      <label class="col-sm-5 col-form-label">
+        <strong>Card Number: </strong>{{order.formOfPayment.paymentMethod.paymentCard.cardNum}}<br/>
+        <strong>Card holder name: </strong>{{order.formOfPayment.paymentMethod.paymentCard.cardHolderName}}<br/>
+      </label>
+      </div>
+    </div>
+    <div *ngIf="order.formOfPayment.paymentMethod.paymentMethodType === 'Cash'">
+      <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>{{order.formOfPayment.paymentMethod.paymentMethodType}} details</strong></label>
+      <label class="col-sm-5 col-form-label">
+        <strong>Receipt number: </strong>{{order.formOfPayment.paymentMethod.cash.cashReceiptId}}<br/>
+        <strong>Terminal: </strong>{{order.formOfPayment.paymentMethod.cash.terminalId}}<br/>
+      </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Order Amount</strong></label>
+      <label
+        class="col-sm-5 col-form-label">{{order.formOfPayment.price.value}}&nbsp;{{order.formOfPayment.price.currency}}</label>
+    </div >
+    <div class="form-group row">
+     <label class="col-sm-2 col-form-label text-info">Products</label>
+       <div *ngFor="let product of order.products" >
+        <div label class="col-sm-4"><img mat-card-image src="./assets/{{product.productCode}}.png"></div>
+        <div class="col-sm-8"><label >{{product.productDescription}}
+          <strong>Price:&nbsp;</strong>{{product.productPrice.value}}&nbsp;{{product.productPrice.currency}}
+        </label></div>
+        
+    </div>
+    </div>
+  </div>

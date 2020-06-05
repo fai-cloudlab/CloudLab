@@ -1,0 +1,42 @@
+.offer-create-container .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: red!important;
+    opacity: 1!important;
+  }
+  .offer-create-container .mat-form-field {
+    width: 600px;
+    height:  50px;
+    border: 50px;
+    padding-top: 50px;
+    padding-right: 0px;
+    }
+  
+    .mat-table {
+      display: block;
+      font-family: Tahoma, Verdana;
+      padding: 15px;
+    }
+    
+    .mat-row,
+    .mat-header-row {
+      display: flex;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      align-items: center;
+      padding: 5px;
+    }
+    
+    .mat-cell1,
+    .mat-header-cell {
+      flex: 1;
+      overflow: hidden;
+      word-wrap: break-word;
+      width: 250px;
+    }
+    .mat-cell2,
+    .mat-header-cell {
+      flex: 1;
+      overflow: hidden;
+      word-wrap: break-word;
+      font-size: large;
+    }
+    

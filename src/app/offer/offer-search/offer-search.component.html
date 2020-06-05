@@ -1,0 +1,56 @@
+<mat-toolbar color="primary" class="header">
+    <Span>Offer Search</Span>
+  </mat-toolbar>
+  <br />
+  <mat-sidenav-container>
+    <mat-sidenav-content>
+      <form [formGroup]="offerSearchForm" (ngSubmit)="searchOffer()" class="offer-search-container">
+        <table>
+          <tr>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-label>Offer Id</mat-label>
+                <input matInput formControlName="offerId">
+              </mat-form-field>
+            </td>
+            <td>
+              <div class="button-wrapper">
+                &nbsp;&nbsp;&nbsp; <button mat-flat-button color="warn">Search</button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <br>
+  
+      <div *ngIf="offerSearch" class="offer-details-container">
+        <mat-sidenav-container>
+          <mat-sidenav-content>
+        
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label">Offer Id</label>
+          <label class="col-sm-7 col-form-label">{{offer.offerId}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Offer Price</label>
+          <label class="col-sm-5 col-form-label">{{offer.offerPrice.value}}&nbsp;{{offer.offerPrice.currency}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Offer Creation Date</label>
+          <label class="col-sm-5 col-form-label">{{offer.offerCreationDate}}</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Offer Expiration Date</label>
+          <label class="col-sm-5 col-form-label">{{offer.offerExpirationDate}}</label>
+        </div>
+        <div *ngFor="let product of offer.productList" class="form-group row">
+          <label class="col-sm-2 col-form-label">Product Description</label>
+          <label class="col-sm-5 col-form-label">{{product.productDescription}}</label>
+        </div>
+        </mat-sidenav-content>
+        </mat-sidenav-container>
+      </div>
+  
+  

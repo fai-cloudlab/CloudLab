@@ -1,0 +1,30 @@
+.offer-search-container{
+    width: 600px;
+    height: 100px;
+    margin-left: 15px;
+  }
+  
+  .offer-search-container .mat-form-field {
+    width: 400px;
+    height: 60px;
+  }
+  .offer-search-container .mat-flat-button{
+    height: 52px;
+    width: 150px;
+  }
+  .offer-search-container form {
+    margin-bottom: 20px;
+  }
+  
+  .offer-search-container form > * {
+    margin: 5px 0;
+  }
+  
+  .offer-search-container .mat-radio-button {
+    margin: 0 12px;
+  }
+
+.offer-details-container{
+    width: 600px;
+    height: 600px;
+  }

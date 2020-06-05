@@ -1,0 +1,124 @@
+<div *ngIf="offerSearch">
+    <form [formGroup]="orderCreateForm" (ngSubmit)="createOrder()">
+      <div formGroupName="customer">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" style="font-size: medium;"><strong>Customer Details</strong></label>
+        </div>
+  
+        <div class="form-group row" >
+          <label class="col-sm-2 col-form-label">First Name</label>
+          <div class="col-sm-3 col-form-label">
+            {{offer.customer.firstName}}&nbsp;{{offer.customer.lastName}}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-3 col-form-label">
+            <label>{{offer.customer.emailAddress}}</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Phone</label>
+          <div class="col-sm-3 col-form-label">
+            {{offer.customer.phone}}
+          </div>
+        </div>
+      </div>
+      <div>
+        <label style="font-size: medium;"><strong>Selected Product Details</strong></label>
+        <div style="height: 1px;" class="mat-row">
+        </div>
+      </div>
+          <div class="mat-table">
+            <div class="mat-row">
+              <div class="mat-cell1"><img mat-card-image src="./assets/{{product.productCode}}.png"></div>
+              <div class="mat-cell2">
+                <strong>Model:&nbsp;</strong> {{product.productCode}} <br />
+                <strong>Description:&nbsp;</strong> {{product.productDescription}} <br />
+                <div *ngIf="product.productPrice">
+                  <strong>Price:&nbsp;</strong>{{product.productPrice.value}}&nbsp;{{product.productPrice.currency}}
+                </div>
+              </div>
+            </div>
+          </div>
+      <div formGroupName="formOfPayment">
+        <div formGroupName="paymentMethod">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Amount</label>
+            <div class="col-sm-3">
+              {{offer.offerPrice.value}}&nbsp;{{offer.offerPrice.currency}}
+            </div>
+        </div>
+  
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Payment method</label>
+            <mat-radio-group class = "example-section" formControlName = "paymentMethodType" (change)="setPaymentMethod()">
+              <mat-radio-button class = "example-section"
+                 *ngFor = "let paymentMethod of paymentMethods" [value] = "paymentMethod" >
+                 {{paymentMethod}}
+              </mat-radio-button>
+           </mat-radio-group>
+              </div>
+  <div *ngIf="paymentMethod === 'Credit card' || paymentMethod === 'Debit card'">
+          <div formGroupName="paymentCard">
+  
+            <div>
+            <mat-form-field floatLabel="auto" appearence="standard">
+              <mat-label>Card Number</mat-label>
+              <input matInput required formControlName="cardNum" maxlength="16" numbersOnly />
+              <mat-hint align="end">16 digit number</mat-hint>
+              <mat-error *ngIf="hasError('cardNum', 'required')">Card Number is required</mat-error>
+              <mat-error *ngIf="hasError('cardNum', 'maxlength')">16 digits required</mat-error>
+              <mat-error *ngIf="hasError('cardNum', 'minlength')">16 digits required</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field floatLabel="auto" appearence="standard">
+              <mat-label>Card Holder Name</mat-label>
+              <input matInput required formControlName="cardHolderName"/>
+              <mat-hint align="end">Full Name</mat-hint>
+              <mat-error *ngIf="hasError('cardHolderName', 'required')">Name is required</mat-error>
+            </mat-form-field>
+          </div> 
+         <div>
+          <mat-form-field floatLabel="auto" appearence="standard">
+            <mat-label>CVV</mat-label>
+            <input matInput required formControlName="cvv" maxlength="3" numbersOnly/>
+            <mat-error *ngIf="hasError('cvv', 'required')">CVV is required</mat-error>
+            <mat-error *ngIf="hasError('cvv', 'minlength')">3 digits required</mat-error>
+            <mat-hint align="end">3 digit number</mat-hint>
+          </mat-form-field>
+        </div> 
+        <div>
+          <mat-form-field floatLabel="auto" appearence="standard">
+            <mat-label>Exp. Date</mat-label>
+            <input matInput required formControlName="expirationMonth" maxlength="4" numbersOnly/>
+            <mat-hint align="end">mmyy</mat-hint>
+            <mat-error *ngIf="hasError('expirationMonth', 'required')">required</mat-error>
+            <mat-error *ngIf="hasError('expirationMonth', 'minlength')">4 digits required</mat-error>
+          </mat-form-field>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary">Order</button>
+        </div> 
+          </div>
+          
+        </div>
+        </div>
+        <div *ngIf="paymentMethod === 'Cash'">
+        <div align="center">
+        <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary">Order</button>
+      </div>
+    </div>
+      </div>
+  
+      
+  
+      <div *ngIf="orderCreated" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Order created...!</strong>
+        <strong>{{orderId}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </form>
+  </div>
