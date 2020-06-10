@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'; 
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,6 @@ export class CloudLabApiService {
   }
 
   createOrder(orderinput: string){
-    console.log("orderInput: "+JSON.stringify(orderinput));
     return this.http.post(this.orderCreateUrl, orderinput, {headers: {'TransactionId':'TransactionId', 'Content-Type':'application/json; charset=utf-8', 'Accept':'application/json; charset=utf-8'}});
   }
 

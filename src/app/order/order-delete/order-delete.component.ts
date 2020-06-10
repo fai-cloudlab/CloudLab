@@ -9,7 +9,8 @@ import { CloudLabApiService } from '../../services/cloud-lab-api.service';
 })
 export class OrderDeleteComponent implements OnInit {
 
-  orderDeleteted : boolean = false;
+  isErrorOccured: boolean = false;
+  orderDeleteted: boolean = false;
   orderDeleteForm = this.fb.group({
     orderId: ['']
   });
@@ -17,16 +18,16 @@ export class OrderDeleteComponent implements OnInit {
 
   constructor(private apiService: CloudLabApiService, private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  deleteOrder(){
+  deleteOrder() {
     let orderid: string = this.orderDeleteForm.value['orderId'];
-    console.log(orderid)
     this.apiService.deleteOrder(orderid).subscribe((response) => {
       this.orderDeleteted = true;
-    }) 
+    },
+      (error) => {
+        this.isErrorOccured = true;
+      });
   }
-
 
 }

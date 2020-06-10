@@ -20,6 +20,7 @@ export class OrderCreateComponent implements OnInit {
   offerIds: string[] = new Array();
   product: any;
   paymentMethods: string[] = ['Cash', 'Credit card', 'Debit card'];
+  isErrorOccured : boolean = false;
 
   constructor(private apiService: CloudLabApiService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
@@ -73,7 +74,10 @@ export class OrderCreateComponent implements OnInit {
         selectedOffers: [this.offer]
       });
       //this.formControlValueChanged();
-    })
+    },
+    (error) => {
+      this.isErrorOccured = true;
+    });
 
     
   }
@@ -113,6 +117,10 @@ export class OrderCreateComponent implements OnInit {
       this.orderCreated = true;
       this.orderId = response['orderId'];
       this.router.navigateByUrl('/orderSearch/' + this.orderId);
+    },
+    (error) => {
+      console.log("error...."+this.isErrorOccured);
+      this.isErrorOccured = true;
     });
   }
 }

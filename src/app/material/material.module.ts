@@ -19,8 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatAutocompleteModule } from '@angular/material/autocomplete'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatCardModule} from '@angular/material/card';
-
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -42,7 +41,8 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatAutocompleteModule,
   MatProgressSpinnerModule,
-  MatCardModule
+  MatCardModule,
+  MatDialogModule
 ];
 
 @NgModule({

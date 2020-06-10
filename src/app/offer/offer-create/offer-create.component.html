@@ -1,58 +1,66 @@
 <div calss="panel panel-default">
-    <div class="panel-body">
-  
-  <div class="offer-create-container">
-    <form [formGroup]='offerCreateForm'>
-          <div align="center" >
-            <mat-form-field class="w-50 p-3" appearance="fill">
-              <mat-label>Search Product</mat-label>
-              <input type="text" matInput [matAutocomplete]="auto" formControlName='searchProduct' 
-                (keyup.enter)="searchProducts()" >
-              <mat-autocomplete #auto="matAutocomplete" [displayWith]="getProductDescription">
-                <mat-option *ngFor="let product of filteredProducts | async" [value]="product"
-                  (click)="displayProductDetails(true)">
-                  <span>{{product.productDescription}}</span>
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-            <button mat-raised-button color="accent" (click)="displayProductDetails(false)">
-              <mat-icon>search</mat-icon>
-            </button>
-            </div>
-            <div *ngIf="showProductDetails">
-            <div style="height: 100px;" class="mat-row">
-            </div>
+  <div class="panel-body">
+
+    <div class="offer-create-container">
+      <form [formGroup]='offerCreateForm'>
+        <div align="center">
+          <mat-form-field class="w-50 p-3" appearance="fill">
+            <mat-label>Search Product</mat-label>
+            <input type="text" matInput [matAutocomplete]="auto" formControlName='searchProduct'
+              (keyup.enter)="searchProducts()">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="getProductDescription">
+              <mat-option *ngFor="let product of filteredProducts | async" [value]="product"
+                (click)="displayProductDetails(true)">
+                <span>{{product.productDescription}}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <button mat-raised-button color="accent" (click)="displayProductDetails(false)">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="showProductDetails">
+          <div style="height: 100px;" class="mat-row">
           </div>
-          <div *ngIf="productsNotFound" class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>No Products found.</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-      
-          <div *ngIf="showProductDetails">
-            <div *ngFor="let product of selectedProducts" class="productList">
-              <div class="mat-table">
-                <div class="mat-row">
-                  <div class="mat-cell1"><img mat-card-image src="./assets/{{product.productCode}}.png"></div>
-                  <div class="mat-cell2">
-                    <strong>Model:&nbsp;</strong> {{product.productCode}} <br />
-                    <strong>Description:&nbsp;</strong> {{product.productDescription}} <br />
-                    <div *ngIf="product.productPrice">
-                      <strong>Price:&nbsp;</strong>{{product.productPrice.value}}&nbsp;{{product.productPrice.currency}}
-                    </div>
-                  </div>
-                  <div class="mat-cell3">
-                    <button mat-raised-button >Add to Cart</button>
-                    <br/><br/><br/>
-                    <button mat-raised-button color="accent" (click)="createOrder(product)">&nbsp;Buy Now&nbsp;&nbsp;</button>
+        </div>
+        <div *ngIf="productsNotFound" class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>No Products found.</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div *ngIf="isErrorOccured" class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Error occured.</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div *ngIf="showProductDetails">
+          <div *ngFor="let product of selectedProducts" class="productList">
+            <div class="mat-table">
+              <div class="mat-row">
+                <div class="mat-cell1"><img mat-card-image src="./assets/{{product.productCode}}.png"></div>
+                <div class="mat-cell2">
+                  <strong>Model:&nbsp;</strong> {{product.productCode}} <br />
+                  <strong>Description:&nbsp;</strong> {{product.productDescription}} <br />
+                  <div *ngIf="product.productPrice">
+                    <strong>Price:&nbsp;</strong>{{product.productPrice.value}}&nbsp;{{product.productPrice.currency}}
                   </div>
                 </div>
+                <div class="mat-cell3">
+                  <button mat-raised-button>Add to Cart</button>
+                  <br /><br /><br />
+                  <button mat-raised-button color="accent" (click)="createOrder(product)">&nbsp;Buy
+                    Now&nbsp;&nbsp;</button>
+                </div>
               </div>
-              
             </div>
+
           </div>
-    </form>
+        </div>
+      </form>
+    </div>
   </div>
-  </div>
-  </div>
+</div>
