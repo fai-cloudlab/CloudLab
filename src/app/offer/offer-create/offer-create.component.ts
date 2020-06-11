@@ -140,6 +140,16 @@ export class OfferCreateComponent implements OnInit {
     );
   }
 
+  closeAlert() {
+    this.isErrorOccured = false;
+  }
+
+  closeSearchAlert(){
+    this.productsNotFound = false;
+    this.showProductDetails = false;
+  }
+
+
   displayProductDetails(flag: boolean) {
     if (this.isErrorOccured) return null;
 

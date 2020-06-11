@@ -20,6 +20,11 @@ export class OrderDeleteComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  closeAlert() {
+    this.isErrorOccured = false;
+  }
+
+
   deleteOrder() {
     let orderid: string = this.orderDeleteForm.value['orderId'];
     this.apiService.deleteOrder(orderid).subscribe((response) => {

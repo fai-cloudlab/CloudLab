@@ -14,11 +14,11 @@
 </div>
 <div style="height: 5px;">
 </div>
-<div *ngIf="isErrorOccured" class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Error occured.</strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<div [class.show]="isErrorOccured" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
+  <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
     <span aria-hidden="true">&times;</span>
   </button>
+  <strong>Error occured. Unable to search Order. Please try again...!</strong>
 </div>
 
 <div *ngIf="orderDetails">

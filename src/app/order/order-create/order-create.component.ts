@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder, Validators } from '@angular/forms';
 import { CloudLabApiService } from '../../services/cloud-lab-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,7 +23,12 @@ export class OrderCreateComponent implements OnInit {
   paymentMethods: string[] = ['Cash', 'Credit card', 'Debit card'];
   isErrorOccured : boolean = false;
 
+
   constructor(private apiService: CloudLabApiService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+
+  closeAlert() {
+    this.isErrorOccured = false;
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -30,6 +36,7 @@ export class OrderCreateComponent implements OnInit {
     });
 
     this.apiService.serachOffer(this.offerIds[0]).subscribe((response) => {
+      this.isErrorOccured = false;
       this.offerSearch = true;
 
       this.offer = response['offers'][0];
@@ -73,7 +80,6 @@ export class OrderCreateComponent implements OnInit {
         }),
         selectedOffers: [this.offer]
       });
-      //this.formControlValueChanged();
     },
     (error) => {
       this.isErrorOccured = true;
@@ -113,13 +119,13 @@ export class OrderCreateComponent implements OnInit {
     orderRequest['selectedOffers'] = offers;
     this.apiService.createOrder(orderRequest
     ).subscribe((response) => {
+      this.isErrorOccured = false;
       this.orderCreateForm.reset();
       this.orderCreated = true;
       this.orderId = response['orderId'];
       this.router.navigateByUrl('/orderSearch/' + this.orderId);
     },
     (error) => {
-      console.log("error...."+this.isErrorOccured);
       this.isErrorOccured = true;
     });
   }

@@ -22,6 +22,10 @@ export class OrderSearchComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  closeAlert() {
+    this.isErrorOccured = false;
+  }
+
   orderSearchForm = this.fb.group({
     orderId: [''],
   });
