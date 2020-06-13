@@ -4,27 +4,28 @@
     <div class="offer-create-container">
       <form [formGroup]='offerCreateForm'>
         <div align="center">
-          <mat-form-field class="w-50 p-3" appearance="fill">
-            <mat-label>Search Product</mat-label>
-            <input type="text" matInput [matAutocomplete]="auto" formControlName='searchProduct'
-              (keyup.enter)="searchProducts()">
+          <mat-form-field>
+            
+            <input type="text" placeholder="Search products" matInput [matAutocomplete]="auto" formControlName='searchProduct'
+            (ngModelChange)="searchProducts($event)"> 
+              <p align="right">
+              <mat-icon (click)="displayProductDetails(false)" style="cursor: pointer;">search</mat-icon>
+            </p>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="getProductDescription">
-              <mat-option *ngFor="let product of filteredProducts | async" [value]="product"
+              <mat-option [ngClass]="{'hide-autocomplete': !showAutocomplete}" *ngFor="let product of filteredProducts | async" [value]="product"
                 (click)="displayProductDetails(true)">
                 <span>{{product.productDescription}}</span>
               </mat-option>
             </mat-autocomplete>
+           
           </mat-form-field>
-          <button mat-raised-button color="accent" (click)="displayProductDetails(false)">
-            <mat-icon>search</mat-icon>
-          </button>
+          
         </div>
         <div *ngIf="showProductDetails">
-          <div style="height: 100px;" class="mat-row">
+          <div style="height: 50px;" class="mat-row">
           </div>
         </div>
-        
-        <div [class.show]="productsNotFound" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
+  <div [class.show]="productsNotFound" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
           <button type="button" class="close" aria-label="Close" (click)="closeSearchAlert()">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -38,7 +39,8 @@
           </button>
           <strong>Error occured. Unable to search Products. Please try again...!</strong>
         </div>
-        
+      
+
         <div *ngIf="showProductDetails">
           <div *ngFor="let product of selectedProducts" class="productList">
             <div class="mat-table">
@@ -65,4 +67,5 @@
       </form>
     </div>
   </div>
-</div>
+</div> 
+

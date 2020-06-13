@@ -70,16 +70,19 @@
           <div formGroupName="paymentCard">
   
             <div>
-            <mat-form-field floatLabel="auto" appearence="standard">
-              <mat-label>Card Number</mat-label>
-              <input matInput required formControlName="cardNum" maxlength="16" numbersOnly />
-              <mat-hint align="end">16 digit number</mat-hint>
-              <mat-error *ngIf="hasError('cardNum', 'required')">Card Number is required</mat-error>
-              <mat-error *ngIf="hasError('cardNum', 'maxlength')">16 digits required</mat-error>
-              <mat-error *ngIf="hasError('cardNum', 'minlength')">16 digits required</mat-error>
-            </mat-form-field>
-          </div>
-          <div>
+              <mat-form-field floatLabel="auto" appearence="standard">
+                <mat-label>Card Number</mat-label>
+                <input matInput type="number" class="quantity"  required  formControlName="cardNum"  maxlength="3" onKeyPress="if(this.value.length==16) return false;" 
+                onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"/>
+                <mat-hint align="end">16 digit number</mat-hint>
+                
+                <mat-error *ngIf="hasError('cardNum', 'required')">Card Number is required</mat-error>
+                <mat-error *ngIf="hasError('cardNum', 'maxlength')">16 digits required</mat-error>
+                <mat-error *ngIf="hasError('cardNum', 'minlength')">16 digits required</mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div>
             <mat-form-field floatLabel="auto" appearence="standard">
               <mat-label>Card Holder Name</mat-label>
               <input matInput required formControlName="cardHolderName"/>
@@ -87,26 +90,29 @@
               <mat-error *ngIf="hasError('cardHolderName', 'required')">Name is required</mat-error>
             </mat-form-field>
           </div> 
-         <div>
-          <mat-form-field floatLabel="auto" appearence="standard">
-            <mat-label>CVV</mat-label>
-            <input matInput required formControlName="cvv" maxlength="3" numbersOnly/>
-            <mat-error *ngIf="hasError('cvv', 'required')">CVV is required</mat-error>
-            <mat-error *ngIf="hasError('cvv', 'minlength')">3 digits required</mat-error>
-            <mat-hint align="end">3 digit number</mat-hint>
-          </mat-form-field>
-        </div> 
-        <div>
-          <mat-form-field floatLabel="auto" appearence="standard">
-            <mat-label>Exp. Date</mat-label>
-            <input matInput required formControlName="expirationMonth" maxlength="4" numbersOnly/>
-            <mat-hint align="end">mmyy</mat-hint>
-            <mat-error *ngIf="hasError('expirationMonth', 'required')">required</mat-error>
-            <mat-error *ngIf="hasError('expirationMonth', 'minlength')">4 digits required</mat-error>
-          </mat-form-field>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary">Order</button>
-        </div> 
+          <div>
+            <mat-form-field floatLabel="auto" appearence="standard">
+              <mat-label>CVV</mat-label>
+              <input matInput type="number" class="quantity" required formControlName="cvv" onKeyPress="if(this.value.length==3) return false;"
+              onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+              />
+              <mat-error *ngIf="hasError('cvv', 'required')">CVV is required</mat-error>
+              <mat-error *ngIf="hasError('cvv', 'minlength')">3 digits required</mat-error>
+              <mat-hint align="end">3 digit number</mat-hint>
+            </mat-form-field>
+          </div> 
+          <div>
+            <mat-form-field floatLabel="auto" appearence="standard">
+              <mat-label>Exp. Date</mat-label>
+              <input matInput type="number" class="quantity" required formControlName="expirationMonth" onKeyPress="if(this.value.length==4) return false;" 
+              onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"/>
+              <mat-hint align="end">mmyy</mat-hint>
+              <mat-error *ngIf="hasError('expirationMonth', 'required')">required</mat-error>
+              <mat-error *ngIf="hasError('expirationMonth', 'minlength')">4 digits required</mat-error>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary">Order</button>
+          </div>  
           </div>
           
         </div>

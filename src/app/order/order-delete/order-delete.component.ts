@@ -31,7 +31,7 @@ export class OrderDeleteComponent implements OnInit {
       this.orderDeleteted = true;
     },
       (error) => {
-        this.isErrorOccured = true;
+          this.isErrorOccured = true;
       });
   }
 

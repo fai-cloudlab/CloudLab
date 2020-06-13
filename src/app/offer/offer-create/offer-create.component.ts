@@ -32,6 +32,8 @@ export class OfferCreateComponent implements OnInit {
   filteredProducts: Observable<Product[]>;
   serachStr: string;
   isErrorOccured: boolean = false;
+  showAutocomplete: boolean = false;
+
 
   constructor(
     private apiService: CloudLabApiService,
@@ -106,20 +108,20 @@ export class OfferCreateComponent implements OnInit {
     return product.productDescription;
   }
 
-  searchProducts() {
-    if (this.isErrorOccured) return null;
+//  searchProducts() {
+  //  if (this.isErrorOccured) return null;
 
-    this.selectedProducts = this._filter(
-      this.offerCreateForm.get('searchProduct').value
-    );
-    if (JSON.stringify(this.selectedProducts) === '[]') {
-      this.productsNotFound = true;
-      this.showProductDetails = false;
-    } else {
-      this.showProductDetails = true;
-      this.productsNotFound = false;
-    }
-  }
+    //this.selectedProducts = this._filter(
+      //this.offerCreateForm.get('searchProduct').value
+    //);
+    //if (JSON.stringify(this.selectedProducts) === '[]') {
+      //this.productsNotFound = true;
+      //this.showProductDetails = false;
+    //} else {
+      //this.showProductDetails = true;
+      //this.productsNotFound = false;
+    //}
+  //}
 
   createOrder(product: Product) {
     let products: any = new Array();
@@ -170,4 +172,26 @@ export class OfferCreateComponent implements OnInit {
 
     this.showProductDetails = true;
   }
+
+  searchProducts(e) {
+    if(e && e.length >= 3) {
+      this.showAutocomplete = true;
+   } else {
+      this.showAutocomplete = false;
+   }
+
+    if (this.isErrorOccured) return null;
+
+    this.selectedProducts = this._filter(
+      this.offerCreateForm.get('searchProduct').value
+    );
+    // if (JSON.stringify(this.selectedProducts) === '[]') {
+    //   this.productsNotFound = true;
+    //   this.showProductDetails = false;
+    // } else {
+    //   this.showProductDetails = true;
+    //   this.productsNotFound = false;
+    // }
+  }
+
 }

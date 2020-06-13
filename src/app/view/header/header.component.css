@@ -1,12 +1,16 @@
 .contentDiv{
-    min-height: 950px;
+    min-height: 1000px;
     border-width:1px !important;
     border-style:solid;
-    max-width: 1200px;
-    width: 1200;
-    min-width: 1200px;
-}
-.footerDiv{
+    max-width: 100%;
+    width: 100%;
+    min-width: 100%;
+    
+    }
+    .body-class {
+        overflow-x: hidden;
+      }
+/* .footerDiv{
     background-color: #343a40!important;
     min-height: 40px;
     text-align: center;
@@ -14,4 +18,4 @@
     max-width: 1300px;
     width: 1300px;
     min-width: 1300px;
-}
+} */
