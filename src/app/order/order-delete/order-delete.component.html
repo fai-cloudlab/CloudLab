@@ -15,4 +15,10 @@
     </button>
     <strong>Error occured. Unable to delete Order. Please try again...!</strong>
   </div>
+  <div [class.show]="orderDeleteted" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Order deleted...!</strong>
+  </div>
 </form>

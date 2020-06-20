@@ -17,6 +17,12 @@ export interface Price {
   currency: String;
 }
 
+export interface Cart {
+  cartId: String;
+  offerId: String;
+  offerExpirationDate: String;
+}
+
 @Component({
   selector: 'app-offer-create',
   templateUrl: './offer-create.component.html',
@@ -33,7 +39,13 @@ export class OfferCreateComponent implements OnInit {
   serachStr: string;
   isErrorOccured: boolean = false;
   showAutocomplete: boolean = false;
-
+  cart: Cart = {
+    cartId: null,
+    offerExpirationDate: "142525000",
+    offerId: null
+  };
+  cartItemsCount: Number = 0;
+  
 
   constructor(
     private apiService: CloudLabApiService,
@@ -70,6 +82,7 @@ export class OfferCreateComponent implements OnInit {
     if (this.loadProducts && temp.length > 1) {
       this.apiService.getAllProducts().subscribe(
         (response) => {
+          this.isErrorOccured = false;
           this.productsList = <Product[]>response;
         },
         (error) => {
@@ -85,6 +98,7 @@ export class OfferCreateComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.apiService.getAllProducts().subscribe(
       (response) => {
+        this.isErrorOccured = false;
         this.productsList = <Product[]>response;
       },
       (error) => {
@@ -108,21 +122,6 @@ export class OfferCreateComponent implements OnInit {
     return product.productDescription;
   }
 
-//  searchProducts() {
-  //  if (this.isErrorOccured) return null;
-
-    //this.selectedProducts = this._filter(
-      //this.offerCreateForm.get('searchProduct').value
-    //);
-    //if (JSON.stringify(this.selectedProducts) === '[]') {
-      //this.productsNotFound = true;
-      //this.showProductDetails = false;
-    //} else {
-      //this.showProductDetails = true;
-      //this.productsNotFound = false;
-    //}
-  //}
-
   createOrder(product: Product) {
     let products: any = new Array();
     products.push(product);
@@ -131,6 +130,7 @@ export class OfferCreateComponent implements OnInit {
     let searchCriteria: string = JSON.stringify(this.offerCreateForm.value);
     this.apiService.getOffers(searchCriteria).subscribe(
       (response) => {
+        this.isErrorOccured = false;
         response['offers'].forEach((element) => {
           offerIds = element.offerId;
         });
@@ -185,13 +185,41 @@ export class OfferCreateComponent implements OnInit {
     this.selectedProducts = this._filter(
       this.offerCreateForm.get('searchProduct').value
     );
-    // if (JSON.stringify(this.selectedProducts) === '[]') {
-    //   this.productsNotFound = true;
-    //   this.showProductDetails = false;
-    // } else {
-    //   this.showProductDetails = true;
-    //   this.productsNotFound = false;
-    // }
+  }
+
+
+  addItemToCart(product){
+    //create
+    let products: Product[] = this.selectedProducts;
+    this.offerCreateForm.get('products').setValue(products);
+    let searchCriteria: any = this.offerCreateForm.value;
+    this.apiService.getOffers(searchCriteria).subscribe(
+      (response) => {
+        this.isErrorOccured = false;
+        response['offers'].forEach((element) => {
+          //cart
+          let cartInput:Cart = {
+            offerId: element.offerId,
+            offerExpirationDate: this.cart.offerExpirationDate,
+            cartId: this.cart.cartId
+          }
+          this.apiService.addProductToCart(JSON.stringify(cartInput)).subscribe(
+            (response) =>{
+              this.cart.cartId = response['cartId'];
+              this.cartItemsCount = response['offers'].length;
+              this.isErrorOccured = false;
+            },
+            (error) => {
+              this.isErrorOccured = true;
+            }
+          );
+        });
+      },
+      (error) => {
+        this.isErrorOccured = true;
+      }
+    );
+
   }
 
 }

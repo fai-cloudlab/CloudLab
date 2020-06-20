@@ -22,6 +22,7 @@ export class OrderDeleteComponent implements OnInit {
 
   closeAlert() {
     this.isErrorOccured = false;
+    this.orderDeleteted = false;
   }
 
 
