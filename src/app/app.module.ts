@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OfferModule } from './offer/offer.module';
+import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
 import { ViewModule } from './view/view.module';
 
@@ -27,6 +28,7 @@ import { ViewModule } from './view/view.module';
     BrowserAnimationsModule,
     MaterialModule,
     OfferModule,
+    CartModule,
     OrderModule,
     ViewModule,
     RouterModule

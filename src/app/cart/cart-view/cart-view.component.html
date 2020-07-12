@@ -1,0 +1,28 @@
+<div [class.show]="isErrorOccured" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Error occured. Unable to view Cart. Please try again...!</strong>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-sm-12 col-form-label bg-info text-white sideHeading alignCenter">
+        Cart Details
+    </div>
+</div>
+<div>
+<label class="col-sm-2 col-form-label text-info">Products</label>
+</div>
+<div class="form-group row">
+    <div *ngFor="let offer of cart.offers">
+        <div label class="col-sm-4"><img mat-card-image src="./assets/{{offer.product.productCode}}.png"></div>
+        <div class="col-sm-8"><label>{{offer.product.productCode}}
+                <strong>Price:&nbsp;</strong>{{offer.offerPrice.value}}&nbsp;{{offer.offerPrice.currency}}
+            </label>
+        </div>
+    </div>
+</div>
+<div align="right">
+    <button type="submit" class="btn btn-primary">Order</button>
+  </div>

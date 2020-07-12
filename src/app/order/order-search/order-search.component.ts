@@ -18,7 +18,6 @@ export class OrderSearchComponent implements OnInit {
   constructor(
     private apiService: CloudLabApiService,
     private fb: FormBuilder,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 

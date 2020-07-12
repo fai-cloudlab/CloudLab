@@ -9,12 +9,14 @@ import { OfferSearchComponent } from './offer/offer-search/offer-search.componen
 import { OrderCreateComponent } from './order/order-create/order-create.component';
 import { OrderSearchComponent } from './order/order-search/order-search.component';
 import { OrderDeleteComponent } from './order/order-delete/order-delete.component';
+import { CartViewComponent } from './cart/cart-view/cart-view.component';
 
 
 const routes: Routes = [
   {path : '', redirectTo: '/offerCreate', pathMatch : 'full'},
   {path : 'offerCreate', component : OfferCreateComponent}, 
   {path : 'offerSearch', component : OfferSearchComponent}, 
+  {path : 'viewCart/:cartId', component : CartViewComponent}, 
   {path : 'orderCreate/:offerIds', component : OrderCreateComponent}, 
   {path : 'orderSearch/:orderId', component : OrderSearchComponent}, 
   {path : 'orderSearch', component : OrderSearchComponent}, 

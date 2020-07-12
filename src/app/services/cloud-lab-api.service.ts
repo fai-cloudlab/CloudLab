@@ -12,6 +12,7 @@ export class CloudLabApiService {
   orderCreateUrl = 'http://localhost:40001/orderManagement/orders'
   orderSearchUrl = 'http://localhost:40001/orderManagement/orders/'
   addToCartUrl = 'http://localhost:50001/cart';
+  viewCartUrl = 'http://localhost:50001/cart/';
   
   headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
 
@@ -48,5 +49,9 @@ export class CloudLabApiService {
 
   deleteOrder(orderId: string){
     return this.http.delete(this.orderSearchUrl+orderId, {headers: {'TransactionId':'TransactionId', 'Content-Type':'application/json; charset=utf-8', 'Accept':'application/json; charset=utf-8'}});
+  }
+
+  viewCart(cartId: string){
+    return this.http.get(this.viewCartUrl+cartId, {headers: {'TransactionId':'TransactionId', 'Content-Type':'application/json; charset=utf-8', 'Accept':'application/json; charset=utf-8'}});
   }
 }

@@ -142,6 +142,10 @@ export class OfferCreateComponent implements OnInit {
     );
   }
 
+  viewCart() {
+  this.router.navigateByUrl('/viewCart/' + this.cart.cartId);
+  }
+
   closeAlert() {
     this.isErrorOccured = false;
   }
