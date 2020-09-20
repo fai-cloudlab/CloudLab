@@ -60,7 +60,7 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Payment method</label>
             <mat-radio-group class = "example-section" formControlName = "paymentMethodType" (change)="setPaymentMethod()">
-              <mat-radio-button class = "example-section"
+              <mat-radio-button class = "example-section" 
                  *ngFor = "let paymentMethod of paymentMethods" [value] = "paymentMethod" >
                  {{paymentMethod}}
               </mat-radio-button>
@@ -111,7 +111,7 @@
               <mat-error *ngIf="hasError('expirationMonth', 'minlength')">4 digits required</mat-error>
             </mat-form-field>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary">Order</button>
+            <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary" style="background-color: crimson;">Order</button>
           </div>  
           </div>
           
@@ -119,7 +119,7 @@
         </div>
         <div *ngIf="paymentMethod === 'Cash'">
         <div align="center">
-        <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary">Order</button>
+        <button type="submit" [disabled]="!orderCreateForm.valid" class="btn btn-primary" style="background-color: crimson;">Order</button>
       </div>
     </div>
       </div>
