@@ -4,7 +4,7 @@
       <form [formGroup]='offerCreateForm'>
         <div>
           <p align="right">
-            <button mat-flat-button color="accent" role="button" [disabled]="! cart.cartId"  (click)="viewCart()">
+            <button mat-flat-button  role="button" [disabled]="! cart.cartId"  (click)="viewCart()">
               <mat-icon>shopping_cart</mat-icon>Checkout {{ cartItemsCount }} Item{{ cartItemsCount > 1 ? 's' : '' }}
               
                </button>
@@ -64,14 +64,14 @@
                 <div class="mat-cell3">
                   <mat-card-actions>
 
-                    <button mat-flat-button color="primary" role="button" (click)="addItemToCart(product)">
+                    <button mat-flat-button color="primary" role="button"  style="background-color: crimson;" (click)="addItemToCart(product)">
                       <mat-icon>add_shopping_cart</mat-icon>
                       Add to Cart
                     </button>
                   </mat-card-actions>
                   <!-- <button mat-raised-button>Add to Cart</button> -->
                   <br /><br /><br />
-                  <button mat-raised-button color="accent" (click)="createOrder(product)">&nbsp;Buy
+                  <button mat-raised-button color="accent" style="background-color: crimson;" (click)="createOrder(product)">&nbsp;Buy
                     Now&nbsp;&nbsp;</button>
                 </div>
               </div>
